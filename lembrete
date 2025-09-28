@@ -1,0 +1,9 @@
+# src/
+#  ├── application/
+#  │    └── use-cases/         # SendWelcomeEmail, SendRentConfirmation
+#  ├── infrastructure/
+#  │    ├── mail/              # Config nodemailer/pug
+#  │    └── messaging/         # Consumer do RabbitMQ
+#  ├── presentation/
+#  │    └── consumers/         # Controllers/EventHandlers do Nest
+#  └── main.ts
