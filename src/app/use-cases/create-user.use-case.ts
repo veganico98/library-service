@@ -6,14 +6,17 @@ import type { IUserRepository } from "src/repositories/user.repository";
 @Injectable()
 export class CreateUserUseCase {
   constructor(
-        @Inject('IUserRepository')
-        private userRepo: IUserRepository,
-    ) {}
+    @Inject("IUserRepository")
+    private readonly userRepo: IUserRepository,
+  ) {}
 
-    async execute(createUserDto: CreateUserDto){
-        const user = new User(createUserDto);
-        await user.password;
-        await this.userRepo.create(user);
-        return user;
-    }
+  async execute(createUserDto: CreateUserDto): Promise<User> {
+    const user = new User(createUserDto);
+
+    const savedUser = await this.userRepo.save(user);
+
+    console.log("🔥 Usuário salvo:", savedUser);
+
+    return savedUser;
+  }
 }

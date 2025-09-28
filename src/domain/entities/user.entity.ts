@@ -13,7 +13,7 @@ export enum DeptoUser {
   CO = 'Coordenador',
 }
 
-@Entity()
+@Entity("user")
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -53,18 +53,19 @@ export class User {
   updatedAt: Date;
 
   constructor(
-  props?: {
-    name: string;
-    email: string;
-    password: string;
-    phone?: string | null;
-    socialnetwork?: string | null;
-  },
-    id?: string,
+    props?: {
+      name: string;
+      email: string;
+      password: string;
+      phone?: string | null;
+      socialnetwork?: string | null;
+    },
   ) {
-    Object.assign(this, props);
-    this.id = id ?? crypto.randomUUID();
+    if (props) {
+      Object.assign(this, props);
+    }
   }
+
 
   verifyUser(user: User): void{
     if (!user){

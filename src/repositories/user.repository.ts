@@ -3,27 +3,36 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "src/domain/entities/user.entity";
 import { Repository } from "typeorm";
 
-export interface IUserRepository{
-    create(user: User): Promise<void>;
-    update(user: User): Promise<void>;
-    remove(user: String): Promise<void>;
+export interface IUserRepository {
+    create(data: Partial<User>): User;       
+    save(user: User): Promise<User>;          
+    update(user: User): Promise<User>;       
+    remove(id: string): Promise<void>;        
     findAll(): Promise<User[]>;
     findById(id: string): Promise<User>;
 }
 
 @Injectable()
-export class UserTypeOrmRepository implements IUserRepository{
+export class UserTypeOrmRepository implements IUserRepository {
     constructor(
         @InjectRepository(User)
-        private typeOrmRepo: Repository<User>,
-    ){}
+        private readonly typeOrmRepo: Repository<User>,
+    ) {}
 
-    async create(user: User): Promise<void> {
-        await this.typeOrmRepo.save(user);
+    create(data: Partial<User>): User {
+        return this.typeOrmRepo.create(data);
     }
 
-    async update(user: User): Promise<void> {
+    async save(user: User): Promise<User> {
+  console.log("💾 Chamando save no repo:", user);
+  const result = await this.typeOrmRepo.save(user);
+  console.log("✅ Resultado do save:", result);
+  return result;
+}
+
+    async update(user: User): Promise<User> {
         await this.typeOrmRepo.update(user.id, user);
+        return this.findById(user.id);
     }
 
     async remove(id: string): Promise<void> {
@@ -37,5 +46,4 @@ export class UserTypeOrmRepository implements IUserRepository{
     findById(id: string): Promise<User> {
         return this.typeOrmRepo.findOneOrFail({ where: { id } });
     }
-
 }
