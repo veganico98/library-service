@@ -9,7 +9,7 @@ export class SetDeptoUserUseCase{
         private userRepo: IUserRepository,
     ) {}
 
-    async execute(id: string, updateUserDto: UpdateUserDto) {
+    async execute(id: number, updateUserDto: UpdateUserDto) {
         const user = await this.userRepo.findById(id);
 
         user.verifyUser(user);

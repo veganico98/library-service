@@ -8,8 +8,8 @@ import { FindAllUserUseCase } from "src/app/use-cases/find-all-user.use-case";
 import { FindByIdUserUseCase } from "src/app/use-cases/find-by-id-user.use-case";
 import { RemoveUserUseCase } from "src/app/use-cases/remove-ser.use-case";
 import { SetDeptoUserUseCase } from "src/app/use-cases/set-depto-user.use-case";
-import { SetRoleUserCase } from "src/app/use-cases/set-role-user.use.case";
 import { UserTypeOrmRepository } from "src/repositories/user.repository";
+import { UpdateUserUseCase } from "src/app/use-cases/update-user.use-case";
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
@@ -21,7 +21,7 @@ import { UserTypeOrmRepository } from "src/repositories/user.repository";
         FindByIdUserUseCase,
         RemoveUserUseCase,
         SetDeptoUserUseCase,
-        SetRoleUserCase,
+        UpdateUserUseCase,
         UserTypeOrmRepository,
         {
             provide: "IUserRepository",

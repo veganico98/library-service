@@ -7,9 +7,9 @@ export interface IUserRepository {
     create(data: Partial<User>): User;       
     save(user: User): Promise<User>;          
     update(user: User): Promise<User>;       
-    remove(id: string): Promise<void>;        
+    remove(id: number): Promise<void>;        
     findAll(): Promise<User[]>;
-    findById(id: string): Promise<User>;
+    findById(id: number): Promise<User>; 
 }
 
 @Injectable()
@@ -35,7 +35,7 @@ export class UserTypeOrmRepository implements IUserRepository {
         return this.findById(user.id);
     }
 
-    async remove(id: string): Promise<void> {
+    async remove(id: number): Promise<void> {
         await this.typeOrmRepo.delete(id);
     }
 
@@ -43,7 +43,8 @@ export class UserTypeOrmRepository implements IUserRepository {
         return this.typeOrmRepo.find();
     }
 
-    findById(id: string): Promise<User> {
+    findById(id: number): Promise<User> {
         return this.typeOrmRepo.findOneOrFail({ where: { id } });
     }
 }
+ 

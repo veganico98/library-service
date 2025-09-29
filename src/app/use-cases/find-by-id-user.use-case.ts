@@ -8,7 +8,7 @@ export class FindByIdUserUseCase{
         private userRepo: IUserRepository,
     ) {}
 
-    execute(id: string){
+    execute(id: number){
         return this.userRepo.findById(id);
     }
 }
