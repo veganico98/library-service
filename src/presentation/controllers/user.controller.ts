@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, Inject, Param, Patch, Post } from "@nestjs/common";
-import { CreateUserDto } from "src/app/dto/create-user.dto";
-import { UpdateDeptoUserDto } from "src/app/dto/update-depto-user.dto";
-import { UpdateUserDto } from "src/app/dto/update-user.dto";
-import { CreateUserUseCase } from "src/app/use-cases/create-user.use-case";
-import { FindAllUserUseCase } from "src/app/use-cases/find-all-user.use-case";
-import { FindByIdUserUseCase } from "src/app/use-cases/find-by-id-user.use-case";
-import { RemoveUserUseCase } from "src/app/use-cases/remove-ser.use-case";
-import { SetDeptoUserUseCase } from "src/app/use-cases/set-depto-user.use-case";
-import { UpdateUserUseCase } from "src/app/use-cases/update-user.use-case";
+import { CreateUserDto } from "src/app/dto/user/create-user.dto";
+import { UpdateDeptoUserDto } from "src/app/dto/user/update-depto-user.dto";
+import { UpdateUserDto } from "src/app/dto/user/update-user.dto";
+import { CreateUserUseCase } from "src/app/use-cases/user/create-user.use-case";
+import { FindAllUserUseCase } from "src/app/use-cases/user/find-all-user.use-case";
+import { FindByIdUserUseCase } from "src/app/use-cases/user/find-by-id-user.use-case";
+import { RemoveUserUseCase } from "src/app/use-cases/user/remove-ser.use-case";
+import { SetDeptoUserUseCase } from "src/app/use-cases/user/set-depto-user.use-case";
+import { UpdateUserUseCase } from "src/app/use-cases/user/update-user.use-case";
+
 
 @Controller('users')
 export class UserController {

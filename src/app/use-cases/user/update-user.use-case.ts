@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
-import { UpdateUserDto } from "../dto/update-user.dto";
+import { UpdateUserDto } from "src/app/dto/user/update-user.dto";
 import { User } from "src/domain/entities/user.entity";
 import type { IUserRepository } from "src/repositories/user.repository";
 

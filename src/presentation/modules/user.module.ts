@@ -3,13 +3,14 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "src/domain/entities/user.entity";
 import { UserController } from "../controllers/user.controller";
 import { UserService } from "src/domain/services/user.service";
-import { CreateUserUseCase } from "src/app/use-cases/create-user.use-case";
-import { FindAllUserUseCase } from "src/app/use-cases/find-all-user.use-case";
-import { FindByIdUserUseCase } from "src/app/use-cases/find-by-id-user.use-case";
-import { RemoveUserUseCase } from "src/app/use-cases/remove-ser.use-case";
-import { SetDeptoUserUseCase } from "src/app/use-cases/set-depto-user.use-case";
+import { CreateUserUseCase } from "src/app/use-cases/user/create-user.use-case";
+import { FindAllUserUseCase } from "src/app/use-cases/user/find-all-user.use-case";
+import { FindByIdUserUseCase } from "src/app/use-cases/user/find-by-id-user.use-case";
+import { RemoveUserUseCase } from "src/app/use-cases/user/remove-ser.use-case";
+import { SetDeptoUserUseCase } from "src/app/use-cases/user/set-depto-user.use-case";
+import { UpdateUserUseCase } from "src/app/use-cases/user/update-user.use-case";
 import { UserTypeOrmRepository } from "src/repositories/user.repository";
-import { UpdateUserUseCase } from "src/app/use-cases/update-user.use-case";
+
 
 @Module({
     imports: [TypeOrmModule.forFeature([User])],
