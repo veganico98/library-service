@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsPhoneNumber, IsString, IsStrongPassword, IsUrl } from 'class-validator';
-import { DeptoUser, RoleUser } from 'src/domain/entities/user.entity';
+import { DeptoUser, RoleUser } from '../../domain/entities/user.entity';
 
 export class CreateUserDto {
   @IsNotEmpty()
