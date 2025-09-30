@@ -1,6 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import type { IUserRepository } from "../../repositories/user.repository";
-import { UpdateUserDto } from "../dto/update-user.dto";
+import type { IUserRepository } from "../../domain/repositories/user.repository";
+
+import { UpdateUserDto } from "../../infrastructure/controllers/dto/update-user.dto";
 
 @Injectable()
 export class SetDeptoUserUseCase{

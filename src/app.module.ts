@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { User } from './domain/entities/user.entity';
-import { UserModule } from './presentation/modules/user.module';
+import { User } from './modules/users/domain/entities/user.entity';
+import { UserModule } from './modules/users/infrastructure/user.module';
+import { BookModule } from './modules/book/infrastructure/book.module';
+import { Book } from './modules/book/domain/entities/book.entity';
 
 @Module({
   imports: [
@@ -14,10 +16,10 @@ import { UserModule } from './presentation/modules/user.module';
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASS || 'root',
       database: process.env.DB_NAME || 'library_service_db',
-      entities: [User],
+      entities: [User, Book],
       synchronize: true,
     }),
-    UserModule,
+    UserModule, BookModule
   ],
   controllers: [AppController],
   providers: [AppService],

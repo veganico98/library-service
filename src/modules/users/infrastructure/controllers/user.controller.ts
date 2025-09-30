@@ -5,9 +5,9 @@ import { CreateUserUseCase } from "../../aplications/use-cases/create-user.use-c
 import { UpdateUserUseCase } from "../../aplications/use-cases/update-user.use-case";
 import { SetDeptoUserUseCase } from "../../aplications/use-cases/set-depto-user.use-case";
 import { RemoveUserUseCase } from "../../aplications/use-cases/remove-ser.use-case";
-import { UpdateDeptoUserDto } from "../../aplications/dto/update-depto-user.dto";
-import { UpdateUserDto } from "../../aplications/dto/update-user.dto";
-import { CreateUserDto } from "../../aplications/dto/create-user.dto";
+import { UpdateDeptoUserDto } from "./dto/update-depto-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { CreateUserDto } from "./dto/create-user.dto";
 
 
 

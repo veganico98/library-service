@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { CreateUserDto } from "../dto/create-user.dto";
+import { CreateUserDto } from "../../infrastructure/controllers/dto/create-user.dto";
 import { User } from "../../domain/entities/user.entity";
-import type { IUserRepository } from "../../repositories/user.repository";
+import type { IUserRepository } from "../../domain/repositories/user.repository";
 
 @Injectable()
 export class CreateUserUseCase {
@@ -15,7 +15,7 @@ export class CreateUserUseCase {
 
     const savedUser = await this.userRepo.save(user);
 
-    console.log("🔥 Usuário salvo:", savedUser);
+    console.log("Usuário salvo:", savedUser);
 
     return savedUser;
   }
