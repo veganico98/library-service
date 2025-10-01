@@ -1,5 +1,6 @@
 import { NotFoundException } from "@nestjs/common";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Loan } from "src/modules/loan/domain/entities/loan.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("book")
 export class Book {
@@ -31,6 +32,11 @@ export class Book {
   })
   updatedAt: Date;
 
+  @OneToMany(() => Loan, (loan) => loan.book)
+  loans: Loan[];
+
+
+
   constructor(
     props?: {
       title: string;
@@ -50,3 +56,4 @@ export class Book {
     }
   }
 }
+

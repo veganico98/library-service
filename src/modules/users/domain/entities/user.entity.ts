@@ -1,5 +1,6 @@
 import { BadRequestException, NotFoundException } from "@nestjs/common";
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Loan } from "src/modules/loan/domain/entities/loan.entity";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum RoleUser {
   Admin = 'administrador',
@@ -51,6 +52,10 @@ export class User {
       onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
+
+  @OneToMany(() => Loan, (loan) => loan.borrower)
+  loans: Loan[];
+
 
   constructor(
     props?: {
