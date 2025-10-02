@@ -10,12 +10,16 @@ import { SetDeptoUserUseCase } from "../aplications/use-cases/set-depto-user.use
 import { UpdateUserUseCase } from "../aplications/use-cases/update-user.use-case";
 import { UserController } from "./controllers/user.controller";
 import { UserService } from "../domain/services/user.service";
+import { RmqModule } from "../../shared/messaging/rmq.module";
+import { RmqTestController } from "./controllers/rmq-test.controller";
 
 
 
 @Module({
-    imports: [TypeOrmModule.forFeature([User])],
-    controllers: [UserController],
+    imports: [TypeOrmModule.forFeature([User]),
+    RmqModule,
+    ],
+    controllers: [UserController, RmqTestController],
     providers: [
         UserService,
         CreateUserUseCase,
@@ -30,5 +34,6 @@ import { UserService } from "../domain/services/user.service";
             useExisting: UserTypeOrmRepository,
         },
     ],
+    exports: ["IUserRepository"]
 })
 export class UserModule {}

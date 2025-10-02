@@ -1,26 +1,40 @@
-import { Injectable } from '@nestjs/common';
-import { UpdateUserDto } from '../../infrastructure/controllers/dto/update-user.dto';
-import { CreateUserDto } from '../../infrastructure/controllers/dto/create-user.dto';
+import { Inject, Injectable } from "@nestjs/common";
+import { ClientProxy } from "@nestjs/microservices";
+import type { IUserRepository } from "../repositories/user.repository";
+import { User } from "../entities/user.entity";
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
-  }
+  constructor(
+    @Inject("IUserRepository")
+    private readonly userRepo: IUserRepository,
 
-  findAll() {
-    return `This action returns all users`;
-  }
+    @Inject("MAIL_SERVICE")
+    private readonly mailClient: ClientProxy
+  ) {}
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
+  async createUser(userData: any): Promise<User> {
+    // salva no banco
+    const user = await this.userRepo.save(
+      this.userRepo.create(userData)
+    );
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+    // garante conexão com o Rabbit antes de emitir
+    await this.mailClient.connect();
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+    // dispara evento no RabbitMQ
+    this.mailClient.emit("user.created", {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+
+    console.log("📤 Evento user.created emitido:", {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    });
+
+    return user;
   }
 }
