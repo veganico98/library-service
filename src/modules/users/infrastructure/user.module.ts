@@ -11,15 +11,12 @@ import { UpdateUserUseCase } from "../aplications/use-cases/update-user.use-case
 import { UserController } from "./controllers/user.controller";
 import { UserService } from "../domain/services/user.service";
 import { RmqModule } from "../../shared/messaging/rmq.module";
-import { RmqTestController } from "./controllers/rmq-test.controller";
-
-
 
 @Module({
     imports: [TypeOrmModule.forFeature([User]),
     RmqModule,
     ],
-    controllers: [UserController, RmqTestController],
+    controllers: [UserController],
     providers: [
         UserService,
         CreateUserUseCase,
