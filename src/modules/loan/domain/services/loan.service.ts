@@ -35,7 +35,6 @@ export class LoanService {
     book.available = false;
     await this.bookRepo.save(book);
 
-    // garante conexão com o Rabbit
     await this.mailClient.connect();
 
     this.mailClient.emit("loan.created", {
@@ -45,7 +44,7 @@ export class LoanService {
       bookTitle: book.title,
     });
 
-    console.log("📤 Evento loan.created emitido:", {
+    console.log("Evento loan.created emitido:", {
       id: saved.id,
       name: user.name,
       email: user.email,
